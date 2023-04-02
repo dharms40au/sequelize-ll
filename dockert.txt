@@ -1,0 +1,7 @@
+docker run --name sequelize-ll -d \
+    -p 3306:3306 \
+    -d \
+    -e MYSQL_ROOT_PASSWORD=password \
+    -e MYSQL_DATABASE=mydb \
+    --restart unless-stopped \
+    mysql:8
