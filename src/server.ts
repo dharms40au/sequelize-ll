@@ -2,8 +2,10 @@ import app from './app';
 import DB from './database';
 import errorMiddleware from './middleware/error.middleware';
 import todoRoutes from './routes/todo.routes';
+import personRoutes from './routes/person.routes';
 
 app.use('/api', todoRoutes);
+app.use('/api', personRoutes);
 app.use(errorMiddleware);
 const port = process.env.PORT || 3000;
 

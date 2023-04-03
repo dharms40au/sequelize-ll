@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize';
 import TodoModel from './models/todo.model';
+import PersonModel from './models/person.model';
 
 const sequelize = new Sequelize({
   dialect: 'mysql',
@@ -18,6 +19,7 @@ const sequelize = new Sequelize({
 
 const DB = {
   Todos: TodoModel(sequelize),
+  Persons: PersonModel(sequelize),
   sequelize,
   Sequelize,
 };

@@ -37,7 +37,7 @@ export const createTodo = async (
 ) => {
   try {
     const dto = req.body as CreateTodoDto;
-    const data = todoService.createTodo(dto);
+    const data = await todoService.createTodo(dto);
     res.status(201).json({ data, message: 'todo created' });
   } catch (error) {
     next(error);
