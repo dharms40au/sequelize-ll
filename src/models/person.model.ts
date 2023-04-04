@@ -1,4 +1,5 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
+import { TodoModel } from './todo.model';
 
 interface IPerson {
   id: number;
@@ -11,7 +12,7 @@ interface IPerson {
 interface PersonCreationAttributes
   extends Omit<IPerson, 'id' | 'createdAt' | 'updatedAt'> {}
 
-class PersonModel
+export class PersonModel
   extends Model<IPerson, PersonCreationAttributes>
   implements IPerson
 {
@@ -45,6 +46,10 @@ export default function (sequelize: Sequelize): typeof PersonModel {
       timestamps: true,
     }
   );
+
+  PersonModel.hasMany(TodoModel, { foreignKey: 'person_id' });
+
+  TodoModel.belongsTo(PersonModel, { foreignKey: 'person_id' });
 
   return PersonModel;
 }

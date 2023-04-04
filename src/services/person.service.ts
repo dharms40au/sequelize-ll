@@ -2,11 +2,14 @@ import DB from '../database';
 import { CreatePersonDto } from '../dtos/create-person.dto';
 import { UpdatePersonDto } from '../dtos/update-person.dto';
 import { HttpException } from '../exceptions/HttpException';
+import { TodoModel } from '../models/todo.model';
 
 const { Persons } = DB;
 
 const findAllPersons = async () => {
-  return Persons.findAll();
+  return Persons.findAll({
+    include: [TodoModel],
+  });
 };
 
 const findPersonById = async (id: number) => {

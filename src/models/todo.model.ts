@@ -1,10 +1,10 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
-import sequelize from '../database';
 
 interface ITodo {
   id: number;
   name: string;
   description: string;
+  person_id: number;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -12,10 +12,14 @@ interface ITodo {
 interface TodoCreationAttributes
   extends Omit<ITodo, 'id' | 'createdAt' | 'updatedAt'> {}
 
-class TodoModel extends Model<ITodo, TodoCreationAttributes> implements ITodo {
+export class TodoModel
+  extends Model<ITodo, TodoCreationAttributes>
+  implements ITodo
+{
   public id: number;
   public name: string;
   public description: string;
+  public person_id: number;
   public readonly createdAt: Date;
   public readonly updatedAt: Date;
 }
@@ -36,6 +40,7 @@ export default function (sequelize: Sequelize): typeof TodoModel {
         type: DataTypes.STRING(240),
         allowNull: false,
       },
+      person_id: DataTypes.INTEGER,
     },
     {
       sequelize,
