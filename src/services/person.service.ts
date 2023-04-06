@@ -8,12 +8,26 @@ const { Persons } = DB;
 
 const findAllPersons = async () => {
   return Persons.findAll({
-    include: [TodoModel],
+    include: [
+      {
+        model: TodoModel,
+        attributes: ['id', 'name', 'description', 'createdAt', 'updatedAt'],
+      },
+    ],
   });
 };
 
 const findPersonById = async (id: number) => {
-  const person = await Persons.findByPk(id);
+  const person = await Persons.findByPk(id, {
+    include: [
+      {
+        model: TodoModel,
+        attributes: {
+          exclude: ['person_id'],
+        },
+      },
+    ],
+  });
   if (!person)
     throw new HttpException(409, `Person with id ${id} does not exist.`);
 
