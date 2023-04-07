@@ -1,6 +1,8 @@
 import { Sequelize } from 'sequelize';
 import TodoModel from './models/todo.model';
 import PersonModel from './models/person.model';
+import CategoryModel from './models/category.model';
+import TodoCategoryModel from './models/todo_category.model';
 
 const sequelize = new Sequelize({
   dialect: 'mysql',
@@ -20,6 +22,8 @@ const sequelize = new Sequelize({
 const DB = {
   Todos: TodoModel(sequelize),
   Persons: PersonModel(sequelize),
+  Categories: CategoryModel(sequelize),
+  TodoCategoryJoin: TodoCategoryModel(sequelize),
   sequelize,
   Sequelize,
 };

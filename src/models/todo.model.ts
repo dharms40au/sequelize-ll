@@ -44,7 +44,8 @@ export default function (sequelize: Sequelize): typeof TodoModel {
     },
     {
       sequelize,
-      modelName: 'todo',
+      tableName: 'todo',
+      modelName: 'todos',
       timestamps: true,
     }
   );

@@ -2,11 +2,21 @@ import DB from '../database';
 import { CreateTodoDto } from '../dtos/create-todo.dto';
 import { UpdateTodoDto } from '../dtos/update-todo.dto';
 import { HttpException } from '../exceptions/HttpException';
+import { CategoryModel } from '../models/category.model';
 
 const { Todos } = DB;
 
 const findAllTodos = async () => {
-  return Todos.findAll();
+  return Todos.findAll({
+    include: [
+      {
+        as: 'categories',
+        model: CategoryModel,
+        attributes: ['id', 'name'],
+        through: { attributes: [] }, // required to prevent returning joining table
+      },
+    ],
+  });
 };
 
 const findById = async (id: number) => {
